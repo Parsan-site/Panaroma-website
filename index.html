@@ -2,14 +2,29 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panaroma Automations — Meta ads, funnels, and automation that closes.</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #1E1C1D; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
-    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1E1C1D; z-index: 9999; }
-    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    
+    /* Added min-height: 100dvh for mobile browser address bar quirks and overscroll-behavior to prevent pull-to-refresh bounce */
+    body { background: #1E1C1D; display: flex; align-items: center; justify-content: center; min-height: 100vh; min-height: 100dvh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; overscroll-behavior: none; }
+    
+    /* Added max-width and word-wrap so the loading text doesn't overflow off narrow screens */
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; max-width: calc(100vw - 40px); word-wrap: break-word; }
+    
+    /* Added padding so the SVG doesn't touch the exact edges of the phone screen */
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1E1C1D; z-index: 9999; padding: 16px; }
+    
+    /* Added max-width and max-height to ensure the SVG respects the container's bounds */
+    #__bundler_thumbnail svg { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; }
+    
     #__bundler_placeholder { color: #999; font-size: 14px; }
+
+    /* Shrinks the loading indicator slightly on very small screens */
+    @media (max-width: 480px) {
+      #__bundler_loading { bottom: 16px; right: 16px; font-size: 12px; padding: 6px 12px; }
+    }
   </style>
   <noscript>
     <style>#__bundler_loading { display: none; }</style>
@@ -49,6 +64,8 @@
   </svg>
 </div>
   <div id="__bundler_loading">Unpacking...</div>
+</body>
+</html>
 
   <script>
     
